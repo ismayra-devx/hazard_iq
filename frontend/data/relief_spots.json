@@ -1,0 +1,82 @@
+﻿[
+  {
+    "id": "RELIEF-001",
+    "name": "AIIMS Trauma Centre",
+    "category": "health_facility",
+    "locality": "Ansari Nagar, South Delhi",
+    "latitude": 28.5665,
+    "longitude": 77.2100,
+    "assistance": "Major public hospital with 24-hour emergency care. DEMO entry — verify current services and availability independently.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "RELIEF-002",
+    "name": "Safdarjung Hospital",
+    "category": "health_facility",
+    "locality": "Safdarjung, New Delhi",
+    "latitude": 28.5687,
+    "longitude": 77.2063,
+    "assistance": "Large government hospital with emergency department. DEMO entry — verify current operational capacity independently.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "RELIEF-003",
+    "name": "Lok Nayak Hospital",
+    "category": "health_facility",
+    "locality": "Delhi Gate, Central Delhi",
+    "latitude": 28.6395,
+    "longitude": 77.2399,
+    "assistance": "Government district hospital serving Central Delhi. DEMO entry — verify heat-emergency services and visiting hours independently.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "RELIEF-004",
+    "name": "Connaught Place Water Point (Demo)",
+    "category": "water_point",
+    "locality": "Connaught Place, Central Delhi",
+    "latitude": 28.6328,
+    "longitude": 77.2182,
+    "assistance": "DEMO/ILLUSTRATIVE entry. Represents a typical public drinking-water distribution point type. No verified kiosk at this exact coordinate.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "RELIEF-005",
+    "name": "Anand Vihar Cooling Point (Demo)",
+    "category": "cooling_centre",
+    "locality": "Anand Vihar, East Delhi",
+    "latitude": 28.6469,
+    "longitude": 77.3160,
+    "assistance": "DEMO/ILLUSTRATIVE entry. Represents the type of cooling facility that may be deployed at major transit hubs during heat emergencies. Not a confirmed official cooling centre.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "RELIEF-006",
+    "name": "Kasturba Hospital",
+    "category": "health_facility",
+    "locality": "Darya Ganj, Old Delhi",
+    "latitude": 28.6428,
+    "longitude": 77.2395,
+    "assistance": "Government infectious disease and general hospital. DEMO entry — verify current heat emergency services independently.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "RELIEF-007",
+    "name": "Rohini Water Point (Demo)",
+    "category": "water_point",
+    "locality": "Rohini Sector 7, North West Delhi",
+    "latitude": 28.7113,
+    "longitude": 77.1280,
+    "assistance": "DEMO/ILLUSTRATIVE entry. Represents a sample water tanker or public kiosk location type. No verified distribution point at this exact coordinate.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "RELIEF-008",
+    "name": "DDU Hospital Hari Nagar",
+    "category": "health_facility",
+    "locality": "Hari Nagar, West Delhi",
+    "latitude": 28.6321,
+    "longitude": 77.0989,
+    "assistance": "Government district hospital serving West Delhi. DEMO entry — verify emergency intake and heat-emergency services independently.",
+    "dataStatus": "demo_sample"
+  }
+]

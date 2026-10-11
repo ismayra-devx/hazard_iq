@@ -1,0 +1,19 @@
+{
+  "name": "delhi-smart-city-map-module",
+  "version": "1.0.0",
+  "description": "Geospatial map module for Delhi Smart City project using Leaflet and OpenStreetMap",
+  "main": "map.js",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "delhi",
+    "smart-city",
+    "leaflet",
+    "openstreetmap",
+    "geospatial"
+  ],
+  "author": "Delhi Smart City Team",
+  "license": "ISC"
+}

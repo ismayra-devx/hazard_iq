@@ -1,0 +1,90 @@
+﻿[
+  {
+    "id": "HOT-001",
+    "name": "Okhla Industrial Zone",
+    "riskLevel": "critical",
+    "riskScore": 5,
+    "radiusMeters": 1200,
+    "latitude": 28.5355,
+    "longitude": 77.2732,
+    "description": "Dense concentration of industrial units with metal roofing and minimal vegetation. Surface temperatures significantly elevated. DEMO illustrative risk zone.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "HOT-002",
+    "name": "Anand Vihar Transit Hub",
+    "riskLevel": "critical",
+    "riskScore": 5,
+    "radiusMeters": 900,
+    "latitude": 28.6469,
+    "longitude": 77.3160,
+    "description": "High-density transit zone with extensive asphalt surfaces, vehicular heat load, and minimal tree cover. DEMO illustrative risk zone.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "HOT-003",
+    "name": "Chandni Chowk Market Corridor",
+    "riskLevel": "high",
+    "riskScore": 4,
+    "radiusMeters": 800,
+    "latitude": 28.6506,
+    "longitude": 77.2303,
+    "description": "Dense urban market with narrow congested streets, high pedestrian density, and concentrated waste heat from commercial activity. DEMO illustrative risk zone.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "HOT-004",
+    "name": "Narela Industrial Cluster",
+    "riskLevel": "high",
+    "riskScore": 4,
+    "radiusMeters": 1400,
+    "latitude": 28.8527,
+    "longitude": 77.0931,
+    "description": "Northern industrial cluster with large rooftop heat emitters and sparse green cover. DEMO illustrative risk zone.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "HOT-005",
+    "name": "Karol Bagh Commercial District",
+    "riskLevel": "moderate",
+    "riskScore": 3,
+    "radiusMeters": 700,
+    "latitude": 28.6517,
+    "longitude": 77.1906,
+    "description": "Mixed commercial zone with glass facades, vehicle congestion, and limited green space. DEMO illustrative risk zone.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "HOT-006",
+    "name": "Connaught Place Urban Core",
+    "riskLevel": "moderate",
+    "riskScore": 3,
+    "radiusMeters": 600,
+    "latitude": 28.6315,
+    "longitude": 77.2167,
+    "description": "Central business district with high-reflectance paved surfaces and dense foot traffic. DEMO illustrative risk zone.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "HOT-007",
+    "name": "Rohini Residential Sector 10",
+    "riskLevel": "low",
+    "riskScore": 2,
+    "radiusMeters": 600,
+    "latitude": 28.7166,
+    "longitude": 77.1189,
+    "description": "Suburban residential area with moderate building density and partial green cover. DEMO illustrative risk zone.",
+    "dataStatus": "illustrative_demo"
+  },
+  {
+    "id": "HOT-008",
+    "name": "Dwarka Sector 14",
+    "riskLevel": "low",
+    "riskScore": 2,
+    "radiusMeters": 550,
+    "latitude": 28.5921,
+    "longitude": 77.0378,
+    "description": "Suburban planned sector with wide roads. Pavement heat absorption noted in peak summer. DEMO illustrative risk zone.",
+    "dataStatus": "illustrative_demo"
+  }
+]

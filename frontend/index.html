@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Hazard IQ - Urban Hazard Intelligence for Delhi. Track heat incidents, monsoon waterlogging, cooling spots, relief centres and vegetation coverage.">
+  <title>Hazard IQ | Urban Hazard Intelligence — Delhi</title>
+
+  <!-- Google Fonts: Inter + Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <!-- Module Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="app-wrapper">
+    <!-- ===== Header ===== -->
+    <header id="main-header" class="header">
+      <div class="header-brand">
+        <div class="brand-logo-mark" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 3L5 8v9c0 7.5 5.5 14.5 13 16 7.5-1.5 13-8.5 13-16V8L18 3z" fill="url(#shieldGrad)"
+              stroke="rgba(14,165,233,0.6)" stroke-width="0.8" />
+            <path d="M11 16 Q13 13.5 15 16 Q17 18.5 19 16" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"
+              fill="none" />
+            <path d="M13 20 Q15 17.5 17 20 Q19 22.5 21 20" stroke="#f59e0b" stroke-width="1.2" stroke-linecap="round"
+              fill="none" opacity="0.7" />
+            <ellipse cx="23" cy="14" rx="2.2" ry="3" fill="#22d3ee" opacity="0.9" />
+            <circle cx="13" cy="14" r="2" fill="white" opacity="0.9" />
+            <defs>
+              <linearGradient id="shieldGrad" x1="5" y1="3" x2="31" y2="34" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0f2744" />
+                <stop offset="100%" stop-color="#0c1a30" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">Hazard<span class="brand-title-accent"> IQ</span></h1>
+          <span class="brand-badge">Urban Hazard Intelligence</span>
+        </div>
+      </div>
+
+      <!-- Quick Status & Controls -->
+      <div class="header-meta">
+        <div class="meta-pill" id="location-indicator">
+          <span class="pill-dot"></span>
+          <span class="pill-label">Delhi, India</span>
+          <span class="pill-coords" id="coords-display">28.6139&deg; N, 77.2090&deg; E</span>
+        </div>
+        <button id="recenter-btn" class="action-btn" title="Recenter view on Delhi" aria-label="Recenter map on Delhi">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <span>Recenter</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== Main Content ===== -->
+    <main id="map-workspace" class="workspace">
+
+      <!-- Map Container -->
+      <div id="map-container-wrapper" class="map-wrapper">
+
+        <!-- Mode Switcher (centred above map) -->
+        <div id="mode-control-bar" class="mode-control-bar" role="toolbar" aria-label="Incident Mode Switcher">
+          <div class="mode-toggle-group" role="tablist">
+            <button type="button" id="btn-mode-heat" class="mode-btn mode-btn-heat active" role="tab"
+              aria-selected="true" data-mode="heat">
+              <span class="btn-icon" aria-hidden="true">&#x1F525;</span>
+              <span class="btn-text">Heat</span>
+              <span class="mode-badge" id="badge-heat-count">10</span>
+            </button>
+            <button type="button" id="btn-mode-monsoon" class="mode-btn mode-btn-monsoon" role="tab"
+              aria-selected="false" data-mode="monsoon">
+              <span class="btn-icon" aria-hidden="true">&#x1F327;</span>
+              <span class="btn-text">Monsoon</span>
+              <span class="mode-badge" id="badge-monsoon-count">10</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== Layer Controls Panel (top-left) ===== -->
+        <div id="layer-controls" class="layer-controls-panel" aria-label="Layer Visibility Controls">
+          <div class="layer-panel-title">&#x1F5FA;&#xFE0F; Layers</div>
+          <div class="layer-btn-group">
+            <button type="button" id="toggle-incidents" class="layer-btn layer-btn-incidents" aria-pressed="true"
+              title="Toggle heat/monsoon incident pins">
+              <span class="layer-btn-icon">&#x1F4CD;</span> Incidents
+            </button>
+            <button type="button" id="toggle-hotspots" class="layer-btn layer-btn-hotspots" aria-pressed="true"
+              title="Toggle heat risk circles">
+              <span class="layer-btn-icon">&#x26A0;&#xFE0F;</span> Risk Zones
+            </button>
+            <button type="button" id="toggle-cooling" class="layer-btn layer-btn-cooling" aria-pressed="true"
+              title="Toggle cooling spots">
+              <span class="layer-btn-icon">&#x1F333;</span> Cooling
+            </button>
+            <button type="button" id="toggle-relief" class="layer-btn layer-btn-relief" aria-pressed="true"
+              title="Toggle relief spots">
+              <span class="layer-btn-icon">&#x1F3E5;</span> Relief
+            </button>
+            <button type="button" id="toggle-vegetation" class="layer-btn layer-btn-veg" aria-pressed="true"
+              title="Toggle vegetation card">
+              <span class="layer-btn-icon">&#x1F331;</span> Vegetation
+            </button>
+          </div>
+        </div>
+
+        <!-- ===== Risk Zone Legend (bottom-left of map) ===== -->
+        <div id="risk-legend" class="risk-legend-card" aria-label="Heat Risk Zone Legend">
+          <div class="legend-title">&#x26A0;&#xFE0F; Heat Risk Zones <span class="demo-label">DEMO</span></div>
+          <div class="legend-row"><span class="legend-swatch" style="background:#ef4444;"></span> Critical</div>
+          <div class="legend-row"><span class="legend-swatch" style="background:#f97316;"></span> High</div>
+          <div class="legend-row"><span class="legend-swatch" style="background:#f59e0b;"></span> Moderate</div>
+          <div class="legend-row"><span class="legend-swatch" style="background:#84cc16;"></span> Low</div>
+          <div class="legend-note">Illustrative zones — not validated</div>
+        </div>
+
+        <!-- Leaflet map -->
+        <div id="map" role="region" aria-label="Interactive map of Delhi"></div>
+
+        <!-- No Incidents Notice -->
+        <div id="no-incidents-notice" class="no-incidents-notice" role="status" style="display: none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <span id="no-incidents-text">No incidents found for the selected mode.</span>
+        </div>
+
+        <!-- Context Overlay Card (bottom-right corner of map) -->
+        <div id="map-context-card" class="context-card">
+          <div class="context-header">
+            <span class="context-tag" id="active-mode-indicator">Active: Heat Incidents</span>
+            <span class="zoom-level" id="zoom-display">Zoom: 11x</span>
+          </div>
+          <p class="context-desc">NCT Delhi &middot; OpenStreetMap</p>
+        </div>
+
+        <!-- ===== Vegetation Info Card (overlaid bottom-left) ===== -->
+        <div id="veg-info-card" class="veg-card" aria-label="Vegetation Coverage">
+          <div class="veg-card-header">
+            <span class="veg-card-icon">&#x1F331;</span>
+            <div>
+              <div class="veg-card-title">Vegetation Coverage</div>
+              <div class="veg-card-sub" id="veg-area">NCT Delhi</div>
+            </div>
+            <span class="veg-pct-big" id="veg-overall-pct">20.2%</span>
+          </div>
+          <div class="veg-bar-track">
+            <div class="veg-bar-fill" id="veg-bar-fill" style="width:20.2%"></div>
+          </div>
+          <div id="veg-district-list" class="veg-district-list"></div>
+          <div class="veg-card-footer">
+            <span class="demo-tag">&#x26A0;&#xFE0F; Illustrative estimate &mdash; not satellite-derived</span>
+            <span id="veg-year" style="color:#475569;font-size:0.64rem"></span>
+          </div>
+        </div>
+
+      </div><!-- end map-wrapper -->
+
+      <!-- ===== Citizen Incident Reporting Panel (right side) ===== -->
+      <aside id="report-panel" class="report-panel" aria-label="Citizen Incident Reporting Panel">
+        <div class="panel-header" id="panel-header">
+          <div class="panel-title-wrap">
+            <span class="panel-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                style="display:inline;vertical-align:middle;margin-right:4px">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>Citizen Report
+            </span>
+            <h2 class="panel-title">Log an Incident</h2>
+          </div>
+          <button id="toggle-panel-btn" class="panel-toggle-btn" type="button" aria-label="Toggle reporting panel"
+            title="Minimize/Expand panel">
+            <svg id="toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div id="panel-body" class="panel-body">
+          <!-- Location Selection & GPS -->
+          <div class="form-group location-group">
+            <div class="location-header">
+              <label class="form-label">Location <span class="required-star">*</span></label>
+              <button type="button" id="geo-btn" class="geo-btn" title="Detect location using browser GPS">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                </svg>
+                <span>Use My Location</span>
+              </button>
+            </div>
+            <div id="location-display" class="location-display">
+              <span id="coords-text">Click map or use GPS to select</span>
+            </div>
+            <input type="hidden" id="report-lat" name="latitude">
+            <input type="hidden" id="report-lng" name="longitude">
+          </div>
+
+          <!-- Feedback Alerts -->
+          <div id="form-alert" class="form-alert" role="alert" style="display: none;"></div>
+
+          <!-- Citizen Report Form -->
+          <form id="incident-form" novalidate>
+            <div class="form-group">
+              <label for="incident-type" class="form-label">Type <span class="required-star">*</span></label>
+              <select id="incident-type" name="incidentType" class="form-select" required>
+                <option value="" disabled selected>Select type&hellip;</option>
+                <option value="heat">&#x1F525; Heat Hotspot / Thermal Stress</option>
+                <option value="monsoon">&#x1F327; Monsoon / Waterlogging</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="incident-name" class="form-label">Name <span class="required-star">*</span></label>
+              <input type="text" id="incident-name" name="name" class="form-input"
+                placeholder="e.g. Waterlogging near Ring Road" required maxlength="100">
+            </div>
+
+            <div class="form-group">
+              <label for="incident-description" class="form-label">Description <span
+                  class="required-star">*</span></label>
+              <textarea id="incident-description" name="description" class="form-textarea" rows="3"
+                placeholder="Describe the observed conditions&hellip;" required></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group form-col">
+                <label for="incident-severity" class="form-label">Severity <span
+                    class="optional-tag">(opt)</span></label>
+                <select id="incident-severity" name="severity" class="form-select">
+                  <option value="">None</option>
+                  <option value="1">1 &ndash; Low</option>
+                  <option value="2">2 &ndash; Moderate</option>
+                  <option value="3">3 &ndash; Significant</option>
+                  <option value="4">4 &ndash; Severe</option>
+                  <option value="5">5 &ndash; Critical</option>
+                </select>
+              </div>
+              <div class="form-group form-col" id="depth-group">
+                <label for="incident-depth" class="form-label">Depth (cm) <span
+                    class="optional-tag">(opt)</span></label>
+                <input type="number" id="incident-depth" name="depthCm" class="form-input" placeholder="e.g. 25" min="0"
+                  max="500" step="1">
+              </div>
+            </div>
+
+            <button type="submit" id="submit-report-btn" class="submit-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              <span>Submit Report</span>
+            </button>
+
+            <p class="form-disclaimer">
+              &#x1F6C8; Prototype &mdash; reports are stored in session memory only.
+            </p>
+          </form>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- ===== Dashboard Summary Cards ===== -->
+    <div id="dashboard-strip" class="dashboard-strip" aria-label="Summary Dashboard">
+      <div class="dash-card dash-card-hotspot">
+        <div class="dash-icon">&#x26A0;&#xFE0F;</div>
+        <div class="dash-content">
+          <div class="dash-count" id="dash-hotspot-count">8</div>
+          <div class="dash-label">Heat Hotspots</div>
+          <div class="dash-sub demo-tag">Illustrative zones</div>
+        </div>
+      </div>
+      <div class="dash-card dash-card-cooling">
+        <div class="dash-icon">&#x1F333;</div>
+        <div class="dash-content">
+          <div class="dash-count" id="dash-cooling-count">10</div>
+          <div class="dash-label">Cooling Spots</div>
+          <div class="dash-sub demo-tag">Demo sample data</div>
+        </div>
+      </div>
+      <div class="dash-card dash-card-relief">
+        <div class="dash-icon">&#x1F3E5;</div>
+        <div class="dash-content">
+          <div class="dash-count" id="dash-relief-count">8</div>
+          <div class="dash-label">Relief Spots</div>
+          <div class="dash-sub demo-tag">Demo sample data</div>
+        </div>
+      </div>
+      <div class="dash-card dash-card-veg">
+        <div class="dash-icon">&#x1F331;</div>
+        <div class="dash-content">
+          <div class="dash-count" id="dash-veg-pct">20.2%</div>
+          <div class="dash-label">Vegetation Cover</div>
+          <div class="dash-sub demo-tag">Illustrative estimate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="main-footer" class="footer">
+      <div class="footer-left">
+        <span>Hazard IQ v2.0.0 &bull; Urban Hazard Intelligence</span>
+      </div>
+      <div class="footer-right">
+        <span>Tiles &amp; Cartography &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank"
+            rel="noopener noreferrer">OpenStreetMap</a> contributors &bull; <span style="color:#f59e0b">Demo data — not
+            verified</span></span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Map Module -->
+  <script src="map.js"></script>
+</body>
+
+</html>

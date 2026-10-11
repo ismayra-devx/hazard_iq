@@ -1,0 +1,102 @@
+﻿[
+  {
+    "id": "COOL-001",
+    "name": "Lodhi Garden",
+    "category": "park",
+    "locality": "Lodhi Colony, South Delhi",
+    "latitude": 28.5933,
+    "longitude": 77.2239,
+    "coolingNote": "Large heritage park with extensive tree cover. Significantly cooler than surrounding urban areas due to dense canopy shade.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "COOL-002",
+    "name": "Nehru Park",
+    "category": "park",
+    "locality": "Chanakyapuri, New Delhi",
+    "latitude": 28.5929,
+    "longitude": 77.1772,
+    "coolingNote": "Well-maintained public park with lawns and trees offering natural shade and cooler microclimate.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "COOL-003",
+    "name": "Sanjay Van Forest Reserve",
+    "category": "forest_shade",
+    "locality": "Vasant Kunj, South Delhi",
+    "latitude": 28.5498,
+    "longitude": 77.1576,
+    "coolingNote": "Dense urban forest reserve with heavy canopy cover. Provides substantial shade and cooler air compared to built-up surroundings.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "COOL-004",
+    "name": "Delhi Ridge Forest (Northern Ridge)",
+    "category": "forest_shade",
+    "locality": "Civil Lines, North Delhi",
+    "latitude": 28.6951,
+    "longitude": 77.2065,
+    "coolingNote": "Protected ridge forest with dense native vegetation. Acts as a natural heat buffer for surrounding areas.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "COOL-005",
+    "name": "Select CITYWALK Mall",
+    "category": "mall",
+    "locality": "Saket District Centre, South Delhi",
+    "latitude": 28.5274,
+    "longitude": 77.2192,
+    "coolingNote": "Large air-conditioned shopping complex. DEMO entry — verify current access policies and operating hours independently before visiting.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "COOL-006",
+    "name": "Ambience Mall, Vasant Kunj",
+    "category": "mall",
+    "locality": "Nelson Mandela Marg, Vasant Kunj",
+    "latitude": 28.5438,
+    "longitude": 77.1603,
+    "coolingNote": "Large enclosed air-conditioned mall. DEMO entry — verify current operating hours and public access conditions independently.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "COOL-007",
+    "name": "Pacific Mall, Subhash Nagar",
+    "category": "mall",
+    "locality": "Subhash Nagar, West Delhi",
+    "latitude": 28.6352,
+    "longitude": 77.1152,
+    "coolingNote": "Enclosed air-conditioned retail mall. DEMO entry — independently verify operating hours and public accessibility before visiting.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "COOL-008",
+    "name": "Connaught Place Central Park",
+    "category": "park",
+    "locality": "Connaught Place, Central Delhi",
+    "latitude": 28.6330,
+    "longitude": 77.2197,
+    "coolingNote": "Central green space within Connaught Place. Provides shade in an otherwise high-heat commercial zone.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "COOL-009",
+    "name": "Aravalli Biodiversity Park",
+    "category": "forest_shade",
+    "locality": "Vasant Vihar, South West Delhi",
+    "latitude": 28.5559,
+    "longitude": 77.1439,
+    "coolingNote": "Restored native Aravalli scrub forest with dense low canopy. Significantly cooler microclimate compared to adjacent built-up areas.",
+    "dataStatus": "demo_sample"
+  },
+  {
+    "id": "COOL-010",
+    "name": "Rohini Sector 14 District Park",
+    "category": "park",
+    "locality": "Rohini Sector 14, North West Delhi",
+    "latitude": 28.7199,
+    "longitude": 77.1123,
+    "coolingNote": "Large public district park with grass, trees and walking paths. Cooler than surrounding dense residential blocks.",
+    "dataStatus": "demo_sample"
+  }
+]

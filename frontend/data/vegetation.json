@@ -1,0 +1,19 @@
+﻿{
+  "_comment": "ILLUSTRATIVE DEMO DATA. These values are NOT derived from satellite imagery, GIS analysis, or any authoritative source. They are representative estimates for prototype demonstration only. Replace with verified NDVI or land-cover data for production use.",
+  "dataStatus": "illustrative_demo",
+  "coverageArea": "National Capital Territory of Delhi (~1484 sq km)",
+  "referenceYear": "2024 (illustrative estimate)",
+  "overallPercentage": 20.2,
+  "districts": [
+    { "name": "South Delhi", "percentage": 28.5, "note": "Includes Lodhi Garden, Sanjay Van, green buffers" },
+    { "name": "New Delhi / Chanakyapuri", "percentage": 35.1, "note": "Includes Ridge forest, Nehru Park, diplomatic enclave greens" },
+    { "name": "South West Delhi", "percentage": 24.8, "note": "Includes Aravalli Biodiversity Park, Vasant Kunj greens" },
+    { "name": "North West Delhi / Rohini", "percentage": 17.2, "note": "Moderate tree cover in residential sectors" },
+    { "name": "Central Delhi", "percentage": 11.4, "note": "Low vegetation in dense commercial zones" },
+    { "name": "East Delhi", "percentage": 13.6, "note": "Limited green space in dense residential areas" },
+    { "name": "West Delhi", "percentage": 15.3, "note": "Mixed residential-commercial with partial greens" },
+    { "name": "North East Delhi", "percentage": 9.8, "note": "Densely built areas with minimal vegetation" },
+    { "name": "North Delhi", "percentage": 22.4, "note": "Includes Northern Ridge forest reserve" },
+    { "name": "Shahdara", "percentage": 8.7, "note": "Heavily urbanised with low green cover" }
+  ]
+}

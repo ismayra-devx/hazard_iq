@@ -1,0 +1,166 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "HazardIQ - Production Cloud Infrastructure (DynamoDB, S3, IAM, and App Runner)"
+
+Parameters:
+  Environment:
+    Type: String
+    Default: production
+    AllowedValues:
+      - production
+      - staging
+      - development
+    Description: Deployment target environment.
+
+  ReportsTableName:
+    Type: String
+    Default: HazardIQ-Reports
+    Description: DynamoDB table name for citizen hazard reports.
+
+  S3BucketNamePrefix:
+    Type: String
+    Default: hazardiq-hazard-photos
+    Description: S3 bucket prefix for private hazard photograph storage.
+
+  BedrockModelId:
+    Type: String
+    Default: amazon.nova-lite-v1:0
+    Description: Amazon Bedrock Multimodal Vision model ID.
+
+  AllowedOrigins:
+    Type: String
+    Default: "*"
+    Description: Comma-separated list of allowed CORS origins (e.g. AWS Amplify frontend URL).
+
+Resources:
+  # ----------------------------------------------------------------------------
+  # 1. DynamoDB: Citizen Hazard Reports
+  # ----------------------------------------------------------------------------
+  ReportsDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref ReportsTableName
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: report_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: report_id
+          KeyType: HASH
+      SSESpecification:
+        SSEEnabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      Tags:
+        - Key: Project
+          Value: HazardIQ
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ----------------------------------------------------------------------------
+  # 2. S3: Private Citizen Hazard Photograph Storage
+  # ----------------------------------------------------------------------------
+  HazardPhotosBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${S3BucketNamePrefix}-${AWS::AccountId}-${AWS::Region}"
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: TransitionOldReportsToInfrequentAccess
+            Status: Enabled
+            Transitions:
+              - TransitionInDays: 90
+                StorageClass: STANDARD_IA
+      Tags:
+        - Key: Project
+          Value: HazardIQ
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ----------------------------------------------------------------------------
+  # 3. IAM: App Runner Instance Role (Least Privilege)
+  # ----------------------------------------------------------------------------
+  HazardIQInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "HazardIQ-AppRunner-InstanceRole-${Environment}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - tasks.apprunner.amazonaws.com
+                - ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: HazardIQServiceAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: DynamoDBAccess
+                Effect: Allow
+                Action:
+                  - dynamodb:PutItem
+                  - dynamodb:GetItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                  - dynamodb:Scan
+                  - dynamodb:Query
+                  - dynamodb:DescribeTable
+                Resource: !GetAtt ReportsDynamoDBTable.Arn
+              - Sid: S3Access
+                Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                  - s3:DeleteObject
+                Resource: !Sub "${HazardPhotosBucket.Arn}/*"
+              - Sid: S3BucketList
+                Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:GetBucketLocation
+                Resource: !GetAtt HazardPhotosBucket.Arn
+              - Sid: BedrockVisionAccess
+                Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:Converse
+                  - bedrock:ListFoundationModels
+                Resource: "*"
+              - Sid: CloudWatchLogs
+                Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - logs:DescribeLogStreams
+                Resource: "arn:aws:logs:*:*:*"
+
+Outputs:
+  DynamoDBTableName:
+    Description: DynamoDB Table Name
+    Value: !Ref ReportsDynamoDBTable
+    Export:
+      Name: !Sub "${AWS::StackName}-DynamoDBTableName"
+
+  S3BucketName:
+    Description: Private S3 Bucket for Hazard Photos
+    Value: !Ref HazardPhotosBucket
+    Export:
+      Name: !Sub "${AWS::StackName}-S3BucketName"
+
+  InstanceRoleArn:
+    Description: IAM Role ARN to attach to App Runner or ECS Task
+    Value: !GetAtt HazardIQInstanceRole.Arn
+    Export:
+      Name: !Sub "${AWS::StackName}-InstanceRoleArn"

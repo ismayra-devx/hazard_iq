@@ -1,0 +1,202 @@
+[
+  {
+    "id": "point_001",
+    "name": "Minto Bridge Underpass",
+    "lat": 28.6331,
+    "lng": 77.2252,
+    "type": "underpass",
+    "baseline_impermeability_ratio": 0.94,
+    "elevation_dip_meters": -3.8,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_002",
+    "name": "Connaught Place Outer Circle",
+    "lat": 28.6315,
+    "lng": 77.2167,
+    "type": "transit_hub",
+    "baseline_impermeability_ratio": 0.90,
+    "elevation_dip_meters": -0.4,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_003",
+    "name": "ITO Junction & Vikas Marg",
+    "lat": 28.6304,
+    "lng": 77.2415,
+    "type": "intersection",
+    "baseline_impermeability_ratio": 0.92,
+    "elevation_dip_meters": -1.2,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_004",
+    "name": "AIIMS Flyover Underpass",
+    "lat": 28.5672,
+    "lng": 77.2100,
+    "type": "underpass",
+    "baseline_impermeability_ratio": 0.88,
+    "elevation_dip_meters": -2.5,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_005",
+    "name": "Kashmere Gate ISBT Ring Road",
+    "lat": 28.6675,
+    "lng": 77.2285,
+    "type": "transit_hub",
+    "baseline_impermeability_ratio": 0.94,
+    "elevation_dip_meters": -2.1,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_006",
+    "name": "Moolchand Underpass",
+    "lat": 28.5661,
+    "lng": 77.2341,
+    "type": "underpass",
+    "baseline_impermeability_ratio": 0.91,
+    "elevation_dip_meters": -2.6,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_007",
+    "name": "Tilak Bridge Railway Underpass",
+    "lat": 28.6249,
+    "lng": 77.2372,
+    "type": "underpass",
+    "baseline_impermeability_ratio": 0.93,
+    "elevation_dip_meters": -2.9,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_008",
+    "name": "Pul Prahladpur Underpass",
+    "lat": 28.5085,
+    "lng": 77.2891,
+    "type": "underpass",
+    "baseline_impermeability_ratio": 0.96,
+    "elevation_dip_meters": -3.5,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_009",
+    "name": "Dhaula Kuan Intersection",
+    "lat": 28.5921,
+    "lng": 77.1565,
+    "type": "transit_hub",
+    "baseline_impermeability_ratio": 0.89,
+    "elevation_dip_meters": -0.6,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_010",
+    "name": "Karol Bagh Arya Samaj Road",
+    "lat": 28.6517,
+    "lng": 77.1906,
+    "type": "commercial_street",
+    "baseline_impermeability_ratio": 0.87,
+    "elevation_dip_meters": -0.5,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_011",
+    "name": "Chandni Chowk Main Promenade",
+    "lat": 28.6506,
+    "lng": 77.2303,
+    "type": "transit_hub",
+    "baseline_impermeability_ratio": 0.85,
+    "elevation_dip_meters": -0.3,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_012",
+    "name": "Lajpat Nagar Ring Road Underpass",
+    "lat": 28.5700,
+    "lng": 77.2432,
+    "type": "underpass",
+    "baseline_impermeability_ratio": 0.90,
+    "elevation_dip_meters": -1.8,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_013",
+    "name": "Saket District Centre & Press Enclave",
+    "lat": 28.5284,
+    "lng": 77.2185,
+    "type": "commercial_street",
+    "baseline_impermeability_ratio": 0.86,
+    "elevation_dip_meters": -0.7,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_014",
+    "name": "Nehru Place Outer Ring Underpass",
+    "lat": 28.5494,
+    "lng": 77.2519,
+    "type": "underpass",
+    "baseline_impermeability_ratio": 0.92,
+    "elevation_dip_meters": -2.0,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_015",
+    "name": "Rohini Sector 10 Madhuban Chowk",
+    "lat": 28.7032,
+    "lng": 77.1219,
+    "type": "intersection",
+    "baseline_impermeability_ratio": 0.89,
+    "elevation_dip_meters": -1.3,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_016",
+    "name": "Anand Vihar ISBT & Gazipur Border",
+    "lat": 28.6469,
+    "lng": 77.3164,
+    "type": "transit_hub",
+    "baseline_impermeability_ratio": 0.94,
+    "elevation_dip_meters": -1.9,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_017",
+    "name": "Dwarka Mor Intersection",
+    "lat": 28.6189,
+    "lng": 77.0324,
+    "type": "intersection",
+    "baseline_impermeability_ratio": 0.88,
+    "elevation_dip_meters": -1.5,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_018",
+    "name": "Janakpuri District Centre",
+    "lat": 28.6297,
+    "lng": 77.0818,
+    "type": "transit_hub",
+    "baseline_impermeability_ratio": 0.85,
+    "elevation_dip_meters": -0.8,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_019",
+    "name": "Jahangirpuri Metro GT Road Underpass",
+    "lat": 28.7258,
+    "lng": 77.1654,
+    "type": "underpass",
+    "baseline_impermeability_ratio": 0.93,
+    "elevation_dip_meters": -2.4,
+    "current_risk_status": "clear"
+  },
+  {
+    "id": "point_020",
+    "name": "Sarita Vihar Mathura Road Underpass",
+    "lat": 28.5289,
+    "lng": 77.2917,
+    "type": "underpass",
+    "baseline_impermeability_ratio": 0.95,
+    "elevation_dip_meters": -2.7,
+    "current_risk_status": "clear"
+  }
+]

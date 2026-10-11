@@ -1,0 +1,30 @@
+version: 1.0
+runtime: python311
+build:
+  commands:
+    build:
+      - pip install -r requirements.txt
+run:
+  command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2
+  network:
+    port: 8000
+    env: PORT
+  env:
+    - name: ENVIRONMENT
+      value: production
+    - name: LOG_LEVEL
+      value: INFO
+    - name: AWS_REGION
+      value: us-east-1
+    - name: ENABLE_DYNAMODB
+      value: "true"
+    - name: DYNAMODB_TABLE_REPORTS
+      value: HazardIQ-Reports
+    - name: ENABLE_S3
+      value: "true"
+    - name: S3_BUCKET_PHOTOS
+      value: hazardiq-hazard-photos
+    - name: ENABLE_BEDROCK
+      value: "true"
+    - name: BEDROCK_MODEL_ID
+      value: amazon.nova-lite-v1:0

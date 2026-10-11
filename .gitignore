@@ -38,6 +38,7 @@ env/
 .env.*.local
 local.env
 *.env
+*.pem
 
 # IDEs and editors
 .vscode/
